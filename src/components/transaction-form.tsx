@@ -31,6 +31,8 @@ import { CalendarIcon } from 'lucide-react'
 import { Calendar } from './ui/calendar'
 
 import { useAddTransaction } from '@/hooks/useAddTransaction'
+import { Toaster } from './ui/sonner'
+import { toast } from 'sonner'
 
 const TransactionForm = () => {
   const { addTransaction } = useAddTransaction()
@@ -73,7 +75,29 @@ const TransactionForm = () => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    try {
+      addTransaction({
+        description: values.description,
+        amount: values.amount,
+        type: values.type,
+        category: values.category,
+        date: values.date,
+      })
+
+      toast.success('Transaction created successfully!', {
+        description:
+          'Your transaction was created and now you can see it in the list.',
+        duration: 8000,
+      })
+
+      form.reset()
+    } catch (err) {
+      toast.error('Something went wrong!', {
+        description: 'Your transaction was not created :(',
+        duration: 8000,
+      })
+      console.log(err)
+    }
   }
 
   return (
@@ -232,6 +256,7 @@ const TransactionForm = () => {
               </Button>
             </form>
           </Form>
+          <Toaster richColors />
         </CardContent>
       </Card>
     </SectionWrapper>
