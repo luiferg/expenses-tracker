@@ -3,7 +3,7 @@ import { buttonVariants } from './ui/button'
 
 const Navbar = () => {
   return (
-    <div className='flex justify-center backdrop-blur-lg w-full fixed top-0 z-20'>
+    <div className='flex justify-center backdrop-blur-lg w-full'>
       <div className='flex justify-between items-center p-4 max-w-screen-xl w-full'>
         <div></div>
         <div className='flex items-center gap-4'>
