@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
+import { format } from 'date-fns'
 import {
   Form,
   FormControl,
@@ -19,10 +20,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 import { Card, CardContent, CardHeader } from './ui/card'
 import SectionWrapper from './section-wrapper'
+import { CalendarIcon } from 'lucide-react'
+import { Calendar } from './ui/calendar'
+
+import { useAddTransaction } from '@/hooks/useAddTransaction'
 
 const TransactionForm = () => {
+  const { addTransaction } = useAddTransaction()
   const formSchema = z.object({
     description: z
       .string()
@@ -47,6 +58,9 @@ const TransactionForm = () => {
       'health',
       'other',
     ]),
+    date: z.date({
+      required_error: 'Date is required.',
+    }),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,8 +68,7 @@ const TransactionForm = () => {
     defaultValues: {
       description: '',
       amount: 0.0,
-      type: 'income',
-      category: 'other',
+      date: new Date(),
     },
   })
 
@@ -79,7 +92,7 @@ const TransactionForm = () => {
                 control={form.control}
                 name='description'
                 render={({ field }) => (
-                  <FormItem className='col-span-2 md:col-span-1'>
+                  <FormItem className='col-span-2'>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
                       <Input placeholder='Groceries' {...field} />
@@ -100,10 +113,9 @@ const TransactionForm = () => {
                     <FormControl>
                       <Input
                         placeholder='0,00'
-                        step='0.01'
+                        step='0.10'
                         type='number'
                         {...field}
-                        required
                       />
                     </FormControl>
                     <FormDescription>
@@ -176,6 +188,45 @@ const TransactionForm = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name='date'
+                render={({ field }) => (
+                  <FormItem className='col-span-2 md:col-span-1'>
+                    <FormLabel>Date</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button className='w-full' variant='outline'>
+                            {field.value ? (
+                              format(field.value, 'PPP')
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className='ml-auto opacity-50 h-4 w-4' />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent>
+                        <Calendar
+                          mode='single'
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date('1900-01-01')
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormDescription>
+                      Select the date of your transaction.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <Button type='submit' className='w-fit'>
                 Submit
               </Button>
