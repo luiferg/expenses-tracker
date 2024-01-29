@@ -70,7 +70,6 @@ const TransactionForm = () => {
     defaultValues: {
       description: '',
       amount: 0.0,
-      date: new Date(),
     },
   })
 

@@ -1,4 +1,18 @@
+import { useGetTransactions } from '@/hooks/useGetTransactions'
 import SectionWrapper from './section-wrapper'
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react'
 import {
   Table,
   TableBody,
@@ -10,6 +24,9 @@ import {
 } from './ui/table'
 
 const TransactionsTable = () => {
+  const { transactions } = useGetTransactions()
+  console.log(transactions)
+
   return (
     <SectionWrapper id='transactions-table'>
       <Table>
