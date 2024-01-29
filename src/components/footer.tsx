@@ -2,7 +2,7 @@ import { Github, Mail } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className='flex justify-center backdrop-blur-lg w-full fixed bottom-0'>
+    <footer className='flex justify-center backdrop-blur-lg w-full fixed bottom-0 z-20'>
       <div className='flex justify-between items-center p-4 max-w-screen-xl w-full'>
         <ul className='flex items-center gap-4'>
           <li>
