@@ -27,7 +27,7 @@ const Auth = () => {
             <CardTitle>Sign In with Google</CardTitle>
           </CardHeader>
           <CardContent className='flex justify-center'>
-            <Button onClick={singInWithGoogle}> Sign In</Button>
+            <Button onClick={singInWithGoogle}>Sign In</Button>
           </CardContent>
         </Card>
       </PageWrapper>

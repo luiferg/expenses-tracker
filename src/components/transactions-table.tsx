@@ -40,6 +40,9 @@ import {
 } from '@/components/ui/table'
 import SectionWrapper from './section-wrapper'
 import { TransactionProps } from '@/types'
+import { useCudTransaction } from '@/hooks/useCudTransaction'
+
+const { deleteTransaction } = useCudTransaction()
 
 export const columns: ColumnDef<TransactionProps>[] = [
   {
@@ -60,7 +63,7 @@ export const columns: ColumnDef<TransactionProps>[] = [
         className={
           row.getValue('transactionType') === 'income'
             ? 'text-primary'
-            : 'text-destructive dark:text-red-500'
+            : 'text-destructive'
         }
       >
         {row.getValue('transactionType')}
@@ -143,10 +146,15 @@ export const columns: ColumnDef<TransactionProps>[] = [
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className='cursor-pointer'>
+            {/* <DropdownMenuItem className='cursor-pointer'>
               <Pencil className='mr-2 w-4 h-4' /> Edit transaction
-            </DropdownMenuItem>
-            <DropdownMenuItem className='text-destructive cursor-pointer'>
+            </DropdownMenuItem> */}
+            <DropdownMenuItem
+              className='text-destructive cursor-pointer'
+              onClick={() => {
+                deleteTransaction(transaction.id)
+              }}
+            >
               <Trash className='mr-2 w-4 h-4' /> Delete transaction
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -160,6 +168,7 @@ export function TransactionTable({ data }: { data: TransactionProps[] }) {
   if (!data) {
     return null
   }
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

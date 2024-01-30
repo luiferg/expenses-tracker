@@ -1,5 +1,5 @@
 import SectionWrapper from './section-wrapper'
-import { Button } from './ui/button'
+import { buttonVariants } from './ui/button'
 
 const Hero = () => {
   return (
@@ -16,7 +16,9 @@ const Hero = () => {
           you have spent or earned.
         </p>
         <p>Keep an eye on your numbers anytime, anywhere.</p>
-        <Button className='w-fit'>Get started</Button>
+        <a className={buttonVariants({ variant: 'default' })} href='/login'>
+          Get started
+        </a>
       </div>
     </SectionWrapper>
   )

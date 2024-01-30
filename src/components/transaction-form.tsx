@@ -30,12 +30,12 @@ import SectionWrapper from './section-wrapper'
 import { CalendarIcon } from 'lucide-react'
 import { Calendar } from './ui/calendar'
 
-import { useAddTransaction } from '@/hooks/useAddTransaction'
+import { useCudTransaction } from '@/hooks/useCudTransaction'
 import { Toaster } from './ui/sonner'
 import { toast } from 'sonner'
 
 const TransactionForm = () => {
-  const { addTransaction } = useAddTransaction()
+  const { addTransaction } = useCudTransaction()
   const formSchema = z.object({
     description: z
       .string()
@@ -50,6 +50,7 @@ const TransactionForm = () => {
     }),
     type: z.enum(['income', 'expense']),
     category: z.enum([
+      'work',
       'food',
       'bills',
       'transportation',
@@ -191,8 +192,9 @@ const TransactionForm = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value='food'>Food</SelectItem>
+                        <SelectItem value='work'>Work</SelectItem>
                         <SelectItem value='bills'>Bills</SelectItem>
+                        <SelectItem value='food'>Food</SelectItem>
                         <SelectItem value='transportation'>
                           Transportation
                         </SelectItem>

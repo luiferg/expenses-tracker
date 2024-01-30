@@ -1,6 +1,4 @@
-import Navbar from '@/components/nav-bar'
 import PageWrapper from '@/components/page-wrapper'
-import Footer from '@/components/footer'
 import TransactionForm from '@/components/transaction-form'
 import { TransactionTable } from '@/components/transactions-table'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
@@ -10,6 +8,8 @@ import UserInfo from '@/components/user-info'
 import { useGetUserInfo } from '@/hooks/useGetUserInfo'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import ResumeBalance from '@/components/resume-balance'
+import SectionWrapper from '@/components/section-wrapper'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ const Dashboard = () => {
     return null
   }
 
-  const { transactions } = useGetTransactions()
+  const { transactions, totalAmount } = useGetTransactions()
   const data = (transactions as TransactionProps[]).map((transaction) => ({
     id: transaction.id,
     transactionAmount: transaction.transactionAmount,
@@ -45,6 +45,12 @@ const Dashboard = () => {
       <PageWrapper className='min-h-screen flex flex-col gap-4 lg:gap-10 items-center'>
         <h1 className='text-4xl'>Expenses Tracker Dashboard</h1>
         <UserInfo />
+        <SectionWrapper
+          id='resume-balance'
+          className='grid grid-cols-1 md:grid-cols-2'
+        >
+          <ResumeBalance totalAmount={totalAmount} />
+        </SectionWrapper>
         <TransactionForm />
         <TransactionTable data={data} />
         <PieChart

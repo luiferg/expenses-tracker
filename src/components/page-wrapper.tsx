@@ -10,7 +10,7 @@ const PageWrapper = ({ children, className }: PageWrapperProps) => {
   return (
     <main className='w-full flex justify-center'>
       <div
-        className={`${className} min-h-screen max-w-screen-xl w-full flex flex-col justify-between`}
+        className={`${className} min-h-[100dvh] max-w-screen-xl w-full flex flex-col justify-between`}
       >
         <Navbar />
         {children}

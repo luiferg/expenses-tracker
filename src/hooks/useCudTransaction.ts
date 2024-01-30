@@ -1,5 +1,11 @@
 import { db } from '@/config/firebase'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  serverTimestamp,
+} from 'firebase/firestore'
 import { useGetUserInfo } from './useGetUserInfo'
 
 interface TransactionProps {
@@ -10,7 +16,7 @@ interface TransactionProps {
   date: Date
 }
 
-export const useAddTransaction = () => {
+export const useCudTransaction = () => {
   const addTransaction = async ({
     description,
     amount,
@@ -30,5 +36,15 @@ export const useAddTransaction = () => {
       createdAt: serverTimestamp(),
     })
   }
-  return { addTransaction }
+
+  const deleteTransaction = async (id: string) => {
+    const transactionDocRef = doc(db, 'transactions', id)
+    try {
+      await deleteDoc(transactionDocRef)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return { addTransaction, deleteTransaction }
 }
