@@ -55,7 +55,17 @@ export const columns: ColumnDef<TransactionProps>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div>{row.getValue('transactionType')}</div>,
+    cell: ({ row }) => (
+      <div
+        className={
+          row.getValue('transactionType') === 'income'
+            ? 'text-primary'
+            : 'text-destructive dark:text-red-500'
+        }
+      >
+        {row.getValue('transactionType')}
+      </div>
+    ),
   },
   {
     accessorKey: 'transactionAmount',
@@ -249,7 +259,10 @@ export function TransactionTable({ data }: { data: TransactionProps[] }) {
                 table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}>
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className='!capitalize'>
+                      <TableCell
+                        key={cell.id}
+                        className='first-letter:uppercase pl-8'
+                      >
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
