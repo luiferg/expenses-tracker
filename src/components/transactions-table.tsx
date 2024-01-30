@@ -63,7 +63,7 @@ export const columns: ColumnDef<TransactionProps>[] = [
         className={
           row.getValue('transactionType') === 'income'
             ? 'text-primary'
-            : 'text-destructive'
+            : 'text-destructive dark:text-red-700'
         }
       >
         {row.getValue('transactionType')}
@@ -150,7 +150,7 @@ export const columns: ColumnDef<TransactionProps>[] = [
               <Pencil className='mr-2 w-4 h-4' /> Edit transaction
             </DropdownMenuItem> */}
             <DropdownMenuItem
-              className='text-destructive cursor-pointer'
+              className='text-destructive dark:text-red-700 cursor-pointer'
               onClick={() => {
                 deleteTransaction(transaction.id)
               }}

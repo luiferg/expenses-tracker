@@ -24,7 +24,7 @@ const ResumeBalance = ({ totalAmount }: TotalAmountProps) => {
             ${totalAmount.income.toFixed(2)}
           </span>
         </div>
-        <div className='flex flex-col gap-1 text-destructive'>
+        <div className='flex flex-col gap-1 text-destructive dark:text-red-700'>
           <span className='text-xl'>Expense</span>
           <span className='text-xl font-bold'>
             ${totalAmount.expense.toFixed(2)}
