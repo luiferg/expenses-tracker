@@ -42,7 +42,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar />
       <PageWrapper className='min-h-screen flex flex-col gap-4 lg:gap-10 items-center'>
         <h1 className='text-4xl'>Expenses Tracker Dashboard</h1>
         <UserInfo />
@@ -54,7 +53,6 @@ const Dashboard = () => {
           )}
         />
       </PageWrapper>
-      <Footer />
     </>
   )
 }

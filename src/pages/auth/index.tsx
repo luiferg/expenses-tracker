@@ -1,11 +1,9 @@
 import { auth, provider } from '@/config/firebase'
 import { signInWithPopup } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
-import Navbar from '@/components/nav-bar'
 import PageWrapper from '@/components/page-wrapper'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import Footer from '@/components/footer'
 
 const Auth = () => {
   const navigate = useNavigate()
@@ -23,8 +21,7 @@ const Auth = () => {
   }
   return (
     <>
-      <Navbar />
-      <PageWrapper className='h-screen flex items-center'>
+      <PageWrapper className='flex items-center'>
         <Card>
           <CardHeader>
             <CardTitle>Sign In with Google</CardTitle>
@@ -34,7 +31,6 @@ const Auth = () => {
           </CardContent>
         </Card>
       </PageWrapper>
-      <Footer />
     </>
   )
 }

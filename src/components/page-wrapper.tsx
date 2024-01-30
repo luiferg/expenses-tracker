@@ -1,3 +1,6 @@
+import Footer from './footer'
+import Navbar from './nav-bar'
+
 interface PageWrapperProps {
   children: React.ReactNode
   className?: string
@@ -7,9 +10,11 @@ const PageWrapper = ({ children, className }: PageWrapperProps) => {
   return (
     <main className='w-full flex justify-center'>
       <div
-        className={`${className} max-w-screen-xl w-full flex flex-col justify-center`}
+        className={`${className} min-h-screen max-w-screen-xl w-full flex flex-col justify-between`}
       >
+        <Navbar />
         {children}
+        <Footer />
       </div>
     </main>
   )

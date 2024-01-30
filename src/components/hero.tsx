@@ -6,7 +6,7 @@ const Hero = () => {
     <SectionWrapper
       id='hero'
       ariaLabel='Hero section'
-      className='relative h-screen'
+      className='relative h-full'
     >
       <div className='bg-primary/60 h-[180px] w-[180px] md:h-[280px] md:w-[280px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 animate-pulse rounded-full' />
       <div className='z-10 flex flex-col gap-4 justify-center items-center backdrop-blur-3xl h-full w-full text-center'>
