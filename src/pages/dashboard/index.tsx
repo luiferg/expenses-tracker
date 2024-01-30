@@ -6,10 +6,24 @@ import { TransactionTable } from '@/components/transactions-table'
 import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { TransactionProps } from '@/types'
 import PieChart from '@/components/pie-chart'
-
-// const date = new Date().toUTCString()
+import UserInfo from '@/components/user-info'
+import { useGetUserInfo } from '@/hooks/useGetUserInfo'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const Dashboard = () => {
+  const navigate = useNavigate()
+  const { userID } = useGetUserInfo()
+  useEffect(() => {
+    if (!userID) {
+      navigate('/login')
+    }
+  }, [userID, navigate])
+
+  if (!userID) {
+    return null
+  }
+
   const { transactions } = useGetTransactions()
   const data = (transactions as TransactionProps[]).map((transaction) => ({
     id: transaction.id,
@@ -31,6 +45,7 @@ const Dashboard = () => {
       <Navbar />
       <PageWrapper className='min-h-screen flex flex-col gap-4 lg:gap-10 items-center'>
         <h1 className='text-4xl'>Expenses Tracker Dashboard</h1>
+        <UserInfo />
         <TransactionForm />
         <TransactionTable data={data} />
         <PieChart
