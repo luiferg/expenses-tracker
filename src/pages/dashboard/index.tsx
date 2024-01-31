@@ -5,23 +5,16 @@ import { useGetTransactions } from '@/hooks/useGetTransactions'
 import { TransactionProps } from '@/types'
 import UserInfo from '@/components/user-info'
 import { useGetUserInfo } from '@/hooks/useGetUserInfo'
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 import ResumeBalance from '@/components/resume-balance'
 import SectionWrapper from '@/components/section-wrapper'
 import ChartsCard from '@/components/charts-card'
 
 const Dashboard = () => {
-  const navigate = useNavigate()
-  const { userID } = useGetUserInfo()
-  useEffect(() => {
-    if (!userID) {
-      navigate('/login')
-    }
-  }, [userID, navigate])
+  const { isAuth } = useGetUserInfo()
 
-  if (!userID) {
-    return null
+  if (!isAuth) {
+    return <Navigate to='/' />
   }
 
   const { transactions, totalAmount } = useGetTransactions()

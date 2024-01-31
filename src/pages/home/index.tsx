@@ -1,20 +1,13 @@
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { useGetUserInfo } from '@/hooks/useGetUserInfo'
-import { useEffect } from 'react'
 import Hero from '@/components/hero'
 import PageWrapper from '@/components/page-wrapper'
 
 const Home = () => {
-  const navigate = useNavigate()
-  const { userID } = useGetUserInfo()
-  useEffect(() => {
-    if (userID) {
-      navigate('/dashboard')
-    }
-  }, [userID, navigate])
+  const { isAuth } = useGetUserInfo()
 
-  if (userID) {
-    return null
+  if (isAuth) {
+    return <Navigate to='/dashboard' />
   }
   return (
     <>

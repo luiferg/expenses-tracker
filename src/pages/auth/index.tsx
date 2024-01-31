@@ -1,12 +1,18 @@
 import { auth, provider } from '@/config/firebase'
 import { signInWithPopup } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import PageWrapper from '@/components/page-wrapper'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useGetUserInfo } from '@/hooks/useGetUserInfo'
 
 const Auth = () => {
   const navigate = useNavigate()
+  const { isAuth } = useGetUserInfo()
+
+  if (isAuth) {
+    return <Navigate to='/dashboard' />
+  }
 
   const singInWithGoogle = async () => {
     const results = await signInWithPopup(auth, provider)
