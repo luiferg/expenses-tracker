@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from './ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 interface TotalAmountProps {
   totalAmount: {
@@ -10,9 +10,9 @@ interface TotalAmountProps {
 
 const ResumeBalance = ({ totalAmount }: TotalAmountProps) => {
   return (
-    <Card>
+    <Card className='flex flex-col md:col-span-2 justify-center'>
       <CardHeader className='flex flex-col gap-1'>
-        <h2 className='text-2xl'>Resume Balance</h2>
+        <CardTitle>Resume Balance</CardTitle>
         <span className='text-3xl font-bold'>
           ${totalAmount.balance.toFixed(2)}
         </span>

@@ -1,5 +1,4 @@
 import { TransactionProps } from '@/types'
-import SectionWrapper from './section-wrapper'
 import 'chart.js/auto'
 import { Pie } from 'react-chartjs-2'
 
@@ -49,25 +48,21 @@ const PieChart = ({ data }: { data: TransactionProps[] }) => {
           'rgba(153, 102, 255, 1)',
           'rgb(255, 255, 10, 1)',
         ],
-        borderWidth: 1,
+        borderWidth: 1.5,
       },
     ],
   }
   if (data)
     return (
-      <SectionWrapper
-        id='graphics-section'
-        className='flex flex-col gap-4 items-center'
-      >
-        <h2 className='text-2xl font-bold'>Expenses by Category</h2>
+      <div className='flex flex-col gap-4 items-center justify-center'>
+        <h2 className='text-lg font-bold'>Expenses by Category</h2>
         <Pie
           id='pie'
+          options={{ responsive: true }}
           data={pieData}
-          height={400}
-          width={400}
-          className='max-w-[400px] max-h-[400px]'
+          className='max-w-[200px] max-h-[200px]'
         />
-      </SectionWrapper>
+      </div>
     )
 }
 
