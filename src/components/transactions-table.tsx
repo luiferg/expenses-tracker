@@ -196,7 +196,7 @@ export function TransactionTable({ data }: { data: TransactionProps[] }) {
   return (
     <SectionWrapper id='transaction-table-data'>
       <div className='w-full'>
-        <div className='flex items-center py-4'>
+        <div className='flex items-center py-4 gap-4'>
           <Input
             placeholder='Filter by description...'
             value={
