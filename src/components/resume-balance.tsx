@@ -14,20 +14,24 @@ const ResumeBalance = ({ totalAmount }: TotalAmountProps) => {
       <CardHeader className='flex flex-col gap-1'>
         <CardTitle>Resume Balance</CardTitle>
         <span className='text-3xl font-bold'>
-          ${totalAmount.balance.toFixed(2)}
+          {totalAmount.balance > 0
+            ? `€${totalAmount.balance.toFixed(2)}`
+            : totalAmount.balance < 0
+            ? `-€${Math.abs(totalAmount.balance).toFixed(2)}`
+            : '€0.00'}
         </span>
       </CardHeader>
       <CardContent className='grid grid-cols-2 gap-10 w-fit'>
         <div className='flex flex-col gap-1 text-primary'>
           <span className='text-xl'>Income</span>
           <span className='text-xl font-bold'>
-            ${totalAmount.income.toFixed(2)}
+            €{totalAmount.income.toFixed(2)}
           </span>
         </div>
         <div className='flex flex-col gap-1 text-destructive dark:text-red-700'>
           <span className='text-xl'>Expense</span>
           <span className='text-xl font-bold'>
-            ${totalAmount.expense.toFixed(2)}
+            €{totalAmount.expense.toFixed(2)}
           </span>
         </div>
       </CardContent>
